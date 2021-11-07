@@ -1,0 +1,3 @@
+E:/CLion 2021.1.2/clionProject/TSPquestion/cmake-build-debug/CMakeFiles/TSPquestion.dir
+E:/CLion 2021.1.2/clionProject/TSPquestion/cmake-build-debug/CMakeFiles/edit_cache.dir
+E:/CLion 2021.1.2/clionProject/TSPquestion/cmake-build-debug/CMakeFiles/rebuild_cache.dir
