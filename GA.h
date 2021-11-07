@@ -27,7 +27,7 @@ class GA{
         void judge();
         std::vector<int> cross(Life* parent1, Life* parent2);
         std::vector<int> mutation(const std::vector<int>& gene);
-        void getOne();
+        Life getOne();
         Life newChild();
         void next();
 };

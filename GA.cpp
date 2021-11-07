@@ -72,5 +72,56 @@ std::vector<int> GA::cross(Life *parent1, Life *parent2) {
 }
 
 std::vector<int> GA::mutation(const std::vector<int> &gene) {
+    std::srand(std::time(nullptr));
+    int index1 = std::rand() % geneLength;
+    int index2 = std::rand() % geneLength;
+
+    std::vector<int> newGene = gene;
+    int t = newGene[index1];
+    newGene[index1] = newGene[index2];
+    newGene[index2] = t;
+
+    return newGene;
+}
+
+Life GA::getOne() {
+    std::srand(std::time(nullptr));
+    int r = std::rand() % (int)bounds;
+    for(auto& life : lives){
+        r -= life.getScore();
+        if(r <= 0) return life;
+    }
+}
+
+Life GA::newChild() {
+    Life parent1 = getOne();
+    std::srand(std::time(nullptr));
+    int rate = std::rand() % 1;
+    std::vector<int> gene;
+    if(rate < crossRate){
+        Life parent2 = getOne();
+        gene = cross(&parent1, &parent2);
+    }
+    else {
+        gene = parent1.getGene();
+    }
+
+    rate = std::rand() % 1;
+    if(rate < mutationRate){
+        gene = mutation(gene);
+    }
+
+    return Life(gene);
+}
+
+void GA::next() {
+    judge();
+    std::vector<Life> newLives;
+    newLives.push_back(best);
+    while(newLives.size() < lifeCount){
+        newLives.push_back(newChild());
+    }
+    lives = newLives;
+    generation += 1;
 
 }
